@@ -153,18 +153,22 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
                 metaOutput = AVCaptureMetadataOutput()
                 captureSession!.addOutput(metaOutput!)
                 metaOutput!.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-                metaOutput!.metadataObjectTypes = [AVMetadataObject.ObjectType.qr,
+                metaOutput!.metadataObjectTypes = [AVMetadataObject.ObjectType.aztec,
                     AVMetadataObject.ObjectType.code128,
                     AVMetadataObject.ObjectType.code39,
                     AVMetadataObject.ObjectType.code39Mod43,
                     AVMetadataObject.ObjectType.code93,
-                    AVMetadataObject.ObjectType.DataMatrixCode,
-                    AVMetadataObject.ObjectType.EAN13Code,
-                    AVMetadataObject.ObjectType.EAN8Code,
-                    AVMetadataObject.ObjectType.Interleaved2of5Code,
-                    AVMetadataObject.ObjectType.ITF14Code,
-                    AVMetadataObject.ObjectType.PDF417Code,
-                    AVMetadataObject.ObjectType.UPCECode]
+                    AVMetadataObject.ObjectType.dataMatrix,
+                    AVMetadataObject.ObjectType.ean13,
+                    AVMetadataObject.ObjectType.ean8,
+                    AVMetadataObject.ObjectType.face,
+                    AVMetadataObject.ObjectType.interleaved2of5,
+                    AVMetadataObject.ObjectType.itf14,
+                    AVMetadataObject.ObjectType.pdf417,
+                    AVMetadataObject.ObjectType.qr,
+                    AVMetadataObject.ObjectType.upce]
+                
+                
                 captureVideoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
                 cameraView.addPreviewLayer(captureVideoPreviewLayer)
                 captureSession!.startRunning()
@@ -249,19 +253,20 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
             return
         }
         let found = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
-        if found.type == AVMetadataObject.ObjectType.qr && 
-                    AVMetadataObject.ObjectType.AztecCode &&
+        if found.type == AVMetadataObject.ObjectType.aztec &&
                     AVMetadataObject.ObjectType.code128 &&
                     AVMetadataObject.ObjectType.code39 &&
                     AVMetadataObject.ObjectType.code39Mod43 &&
                     AVMetadataObject.ObjectType.code93 &&
-                    AVMetadataObject.ObjectType.DataMatrixCode &&
-                    AVMetadataObject.ObjectType.EAN13Code &&
-                    AVMetadataObject.ObjectType.EAN8Code &&
-                    AVMetadataObject.ObjectType.Interleaved2of5Code &&
-                    AVMetadataObject.ObjectType.ITF14Code &&
-                    AVMetadataObject.ObjectType.PDF417Code &&
-                    AVMetadataObject.ObjectType.UPCECode && found.stringValue != nil {
+                    AVMetadataObject.ObjectType.dataMatrix &&
+                    AVMetadataObject.ObjectType.ean13 &&
+                    AVMetadataObject.ObjectType.ean8 &&
+                    AVMetadataObject.ObjectType.face &&
+                    AVMetadataObject.ObjectType.interleaved2of5 &&
+                    AVMetadataObject.ObjectType.itf14 &&
+                    AVMetadataObject.ObjectType.pdf417 &&
+                    AVMetadataObject.ObjectType.qr &&
+                    AVMetadataObject.ObjectType.upce && found.stringValue != nil {
             scanning = false
             let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: found.stringValue)
             commandDelegate!.send(pluginResult, callbackId: nextScanningCommand?.callbackId!)
