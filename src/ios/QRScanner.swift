@@ -154,10 +154,10 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
                 captureSession!.addOutput(metaOutput!)
                 metaOutput!.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
                 metaOutput!.metadataObjectTypes = [AVMetadataObject.ObjectType.qr,
-                    AVMetadataObject.ObjectType.128Code,
-                    AVMetadataObject.ObjectType.39Code,
-                    AVMetadataObject.ObjectType.39Mod43Code,
-                    AVMetadataObject.ObjectType.93Code,
+                    AVMetadataObject.ObjectType.code128,
+                    AVMetadataObject.ObjectType.code39,
+                    AVMetadataObject.ObjectType.code39Mod43,
+                    AVMetadataObject.ObjectType.code93,
                     AVMetadataObject.ObjectType.DataMatrixCode,
                     AVMetadataObject.ObjectType.EAN13Code,
                     AVMetadataObject.ObjectType.EAN8Code,
