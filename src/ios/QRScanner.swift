@@ -251,10 +251,10 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
         let found = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
         if found.type == AVMetadataObject.ObjectType.qr && 
                     AVMetadataObject.ObjectType.AztecCode &&
-                    AVMetadataObject.ObjectType.128Code &&
-                    AVMetadataObject.ObjectType.39Code &&
-                    AVMetadataObject.ObjectType.39Mod43Code &&
-                    AVMetadataObject.ObjectType.93Code &&
+                    AVMetadataObject.ObjectType.code128 &&
+                    AVMetadataObject.ObjectType.code39 &&
+                    AVMetadataObject.ObjectType.code39Mod43 &&
+                    AVMetadataObject.ObjectType.code93 &&
                     AVMetadataObject.ObjectType.DataMatrixCode &&
                     AVMetadataObject.ObjectType.EAN13Code &&
                     AVMetadataObject.ObjectType.EAN8Code &&
